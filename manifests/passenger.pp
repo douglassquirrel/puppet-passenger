@@ -30,9 +30,6 @@ class apache::passenger {
      'libapache2-mod-passenger':
        ensure => installed,
        require => Exec["apt get update"];
-    'rubygems':
-      ensure => '1.3.1-2ubuntu1~bbox1',
-      require => Exec["apt get update"];
     'fastthread': 
        require => Package["rubygems"],
        ensure => present,
