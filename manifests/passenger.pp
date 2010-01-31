@@ -18,10 +18,6 @@ class apache::passenger {
       refreshonly => true;
   }
   
-    'rubygems':
-      ensure => '1.3.1-2ubuntu1~bbox1',
-   require => Exec["apt get update"];
-
   exec {
     "brightbox deb key":
      command => "/usr/bin/wget -O /root/brightbox.asc \
