@@ -10,6 +10,11 @@ class apache::passenger {
     
   }
   exec {
+    "apt get update":
+      command => "/usr/bin/apt-get update";
+  }
+
+  exec {
     "brightbox deb key":
      command => "/usr/bin/wget -O /root/brightbox.asc \
      http://apt.brightbox.net/release.asc;/usr/bin/apt-key add /root/brightbox.asc",
