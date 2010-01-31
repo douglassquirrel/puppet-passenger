@@ -9,10 +9,18 @@ class apache::passenger {
       notify => Exec["apt get update"];
     
   }
+  
   exec {
     "apt get update":
-      command => "/usr/bin/apt-get update";
+      command => "/usr/bin/apt-get update",
+      require => File["brightbox apt source"],
+      subscribe => File["brightbox apt source"],
+      refreshonly => true;
   }
+  
+    'rubygems':
+      ensure => '1.3.1-2ubuntu1~bbox1',
+   require => Exec["apt get update"];
 
   exec {
     "brightbox deb key":
@@ -26,6 +34,9 @@ class apache::passenger {
      'libapache2-mod-passenger':
        ensure => installed,
        require => Exec["apt get update"];
+    'rubygems':
+      ensure => '1.3.1-2ubuntu1~bbox1',
+      require => Exec["apt get update"];
     'fastthread': 
        require => Package["rubygems"],
        ensure => present,
